@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JXOrientation : NSObject
+@interface JXOrientation : NSProxy
 
 - (void) removeActionForSelector:(SEL)aSelector;
 

@@ -66,29 +66,38 @@ static UIInterfaceOrientation currentInterfaceOrientation = UIInterfaceOrientati
 
 - (id)initWithTarget:(UIView *)target orientation:(JXViewOrientation) orientation
 {
-    self = [super init];
-    if (self) {
-        self.target = target;
-        self.orientation = orientation;
-        self.invocations = [NSMutableDictionary dictionary];
-        self.selectors = [NSMutableArray array];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(willAnimateRotationNotification:) 
-                                                     name:JXViewControllerWillAnimateRotation
-                                                   object:nil];
-    }
+    self.target = target;
+    self.orientation = orientation;
+    self.invocations = [NSMutableDictionary dictionary];
+    self.selectors = [NSMutableArray array];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(willAnimateRotationNotification:) 
+                                                 name:JXViewControllerWillAnimateRotation
+                                               object:nil];
     return self;
 }
 
-#pragma mark - Message Forwarding
+#pragma mark - Proxy Implementation
+
+- (BOOL)isKindOfClass:(Class)aClass;
+{
+    return [self.target isKindOfClass:aClass];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol;
+{
+    return [self.target conformsToProtocol:aProtocol];
+}
+
+- (BOOL)respondsToSelector:(SEL)aSelector;
+{
+    return [self.target respondsToSelector:aSelector];
+}
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
-    if ([self.target respondsToSelector:aSelector]) {
-        return [self.target methodSignatureForSelector:aSelector];
-    }
-    return [super methodSignatureForSelector:aSelector];
+    return [self.target methodSignatureForSelector:aSelector];
 }
 
 - (void) forwardInvocation:(NSInvocation *)anInvocation
