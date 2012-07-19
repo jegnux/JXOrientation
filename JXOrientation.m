@@ -119,6 +119,40 @@ static UIInterfaceOrientation currentInterfaceOrientation = UIInterfaceOrientati
         [super forwardInvocation:anInvocation];
 }
 
+- (NSString *) description
+{
+    NSString *orientationString;
+    switch (self.orientation) {
+        case JXViewOrientationPortrait:
+            orientationString = @"Portrait";
+            break;
+        case JXViewOrientationPortraitStraight:
+            orientationString = @"PortraitStraight";
+            break;
+        case JXViewOrientationPortraitUpsideDown:
+            orientationString = @"PortraitUpsideDown";
+            break;
+        case JXViewOrientationLandscape:
+            orientationString = @"Landscape";
+            break;
+        case JXViewOrientationLandscapeLeft:
+            orientationString = @"LandscapeLeft";
+            break;
+        case JXViewOrientationLandscapeRight:
+            orientationString = @"LandscapeRight";
+            break;
+        default:
+            orientationString = @"Unknown";
+            break;
+    }
+    
+    return [NSString stringWithFormat:@"<%@[%@]:%x> : %@",
+            NSStringFromClass([self.target class]),
+            orientationString, 
+            self.target,
+            self.selectors];
+}
+
 #pragma mark - Rotation Behavior
 
 - (void) willAnimateRotationNotification:(NSNotification *)notification
@@ -133,6 +167,7 @@ static UIInterfaceOrientation currentInterfaceOrientation = UIInterfaceOrientati
     
     if (toInterfaceOrientation == self.orientation) 
     {
+        NSLog(@"%@",self);
         for (NSString *selectorString in self.selectors) {
             [[self.invocations objectForKey:selectorString] invokeWithTarget:self.target];
         }
