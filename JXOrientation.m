@@ -1,16 +1,14 @@
-    //
-    //  JXOrientation.m
-    //  orientations
-    //
-    //  Created by Jérôme Alves on 09/07/12.
-    //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-    //
+//
+//  JXOrientation.m
+//
+//  Created by Jérôme Alves on 09/07/12.
+//  Copyright (c) 2012 Jérôme Alves. All rights reserved.
+//
 
 #import "JXOrientation.h"
 #import <objc/runtime.h>
 
 NSString *const JXViewControllerWillAnimateRotation = @"JXViewControllerWillAnimateRotation";
-
 
 typedef enum {
     JXViewOrientationPortraitStraight = UIInterfaceOrientationPortrait,
@@ -167,7 +165,6 @@ static UIInterfaceOrientation currentInterfaceOrientation = UIInterfaceOrientati
     
     if (toInterfaceOrientation == self.orientation) 
     {
-        NSLog(@"%@",self);
         for (NSString *selectorString in self.selectors) {
             [[self.invocations objectForKey:selectorString] invokeWithTarget:self.target];
         }

@@ -1,9 +1,8 @@
 //
 //  JXOrientation.h
-//  orientations
 //
 //  Created by Jérôme Alves on 09/07/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 Jérôme Alves. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
