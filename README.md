@@ -20,9 +20,9 @@ Just use one of the proxy object on any UIView or UIView subclass
 - (id) landscapeRight;
 ```
 
-And send it any message that the receiver can handle. It will be really sent on orientation changes.
+And send it any message that the receiver can handle. They will be actually sent during the rotation animation.
 
-Exemples : 
+Examples : 
 ```objective-c
 - (void)viewDidLoad
 {
